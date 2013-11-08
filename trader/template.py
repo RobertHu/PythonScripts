@@ -1,0 +1,31 @@
+import sys
+def generate():
+    template = 'public string %s { get; private set; }'
+    for arg in sys.argv[1:]:
+        print(template.replace('%s',arg))
+
+def getLoginStatas():
+    root = 'LoginStatus'
+    with open('input.txt',mode='r',encoding='utf-8') as a_file:
+        mylines= (line.strip().replace(',','') for line in a_file)
+        caseLines = ('case {0}.{1}:'.format(root,line) for line in mylines)
+        for line in caseLines:
+            print(line)
+            print('   break;')
+            
+
+def removePrivate():
+    result = []
+    with open('input.txt',mode='r',encoding='utf-8') as a_file:
+        for line in a_file:
+            result.append(line.replace('private',''))
+
+    with open('result.txt',mode='w',encoding='utf-8') as a_file:
+        for line in result:
+            a_file.write(line)
+
+
+if __name__ == '__main__':
+    getLoginStatas()
+
+

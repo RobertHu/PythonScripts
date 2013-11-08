@@ -1,0 +1,10 @@
+  	None,
+        ExceedMaxRetryCount,
+        LoginIdIsEmpty,
+        ParticipantServiceLoginFailed,
+        UserIdIsEmpty,
+        CheckPermissionFailed,
+        NotAuthrized,
+        StateServerLoginFailed,
+        StateServerNotLogined,
+        Success

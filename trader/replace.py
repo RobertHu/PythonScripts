@@ -1,0 +1,26 @@
+import os, re
+files = []
+#cwd = r'D:\Teams\iExchangeCollection\iExchange3 Team\iExchange3Promotion\AsynchronousSslStream\CppTrader\DataMapping'
+cwd = r'D:\Work\Python\trader\trading'
+pattern = r'TradingConsole.Silverlight.Common'
+repl= r'Trader.Server.CppTrader.DataMapping'
+
+for root, dirs, file_names in os.walk(cwd):
+    files.extend(file_names)
+    break
+
+file_paths = [os.path.join(cwd,f) for f in files]
+
+for p in file_paths:
+    content = []
+    with open(p,mode='r',encoding='utf-8') as a_file:
+        content.extend(a_file.readlines())
+    with open(p,mode='w',encoding='utf-8') as a_file:
+        for line in content:
+            if re.search(pattern,line):
+                new_line=re.sub(pattern,repl,line)
+                a_file.write(new_line)
+            else:
+                a_file.write(line)
+
+
