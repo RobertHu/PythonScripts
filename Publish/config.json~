@@ -1,0 +1,13 @@
+{
+    "client":{
+        "source": "D:\\Teams\\iExchangeCollection\\iExchange3 Team\\iExchange3\\FaxAndEmailManager\\bin\\Debug",
+        "dest": "D:\\Work\\FaxEmail\\Publish",
+        "parts":[3] 
+    },
+    "server": {
+        "source": "D:\\Teams\\iExchangeCollection\\iExchange3 Team\\iExchange3\\FaxAndEmailService\\bin",
+        "dest":"D:\\Work\\FaxEmail\\Publish",
+        "parts":[1,2] 
+    }
+}
+

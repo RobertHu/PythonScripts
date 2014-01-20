@@ -1,0 +1,21 @@
+#ifndef _ACCOUNTLISTDELEGATE_H
+getAdvantagesForGo()
+{
+    List<Advantage> advantages;
+    advantages.add("health");
+    advantages.add("nice bread");
+    advantages.add("nice dinner");
+    advantages.add("good mood");
+    return advantages;
+
+}
+#define _ACCOUNTLISTDELEGATE_H
+namespace UI
+{
+
+    class AccountListDelegate
+    {
+    };
+    
+}
+#endif

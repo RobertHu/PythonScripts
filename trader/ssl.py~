@@ -1,0 +1,6 @@
+from socket import socket ,AF_INET, SOCK_STREAM
+import ssl
+
+s = socket(AF_INET,SOCK_STREAM)
+c = ssl.wrap_socket(s,cert_reqs=ssl.CERT_NONE, ca_certs=None)
+c.connect(('127.0.0.1',8888))

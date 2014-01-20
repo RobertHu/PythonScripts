@@ -1,0 +1,64 @@
+import re , sys
+classPattern = r'[\s\t]*class[\s\t]*(.*?)[\s\t]*$'
+inputfileName = 'source.txt'
+filter = '#pragma once'
+content = []
+
+def output(macName,namespaceName,lines,needNamespace):
+    with open(inputfileName,mode='w',encoding='utf-8') as a_file:
+        for line,needNewLine in getOutputContent(macName,namespaceName,lines,needNamespace):
+            appendLine(a_file,line,needNewLine)
+
+def getOutputContent(macName,namespaceName,lines,needNamespace):
+    marcs = list(getMacros(macName))
+    namespaces = list(getnamespaceTemplate(namespaceName)) if needNamespace else None
+    yield (marcs[0],True)
+    yield(marcs[1],True)
+    if needNamespace: 
+        yield(namespaces[0],True) 
+        yield (namespaces[1],True)
+    for line in lines:
+        if filter not in line:
+            yield (line,False)
+    if needNamespace:
+        yield (namespaces[2],True)
+    yield (marcs[2],True)
+
+
+        
+
+def getnamespaceTemplate(name):
+    yield 'namespace ' + name
+    yield '{'
+    yield '}'
+
+def getMacros(input):
+    yield r'#ifndef ' + input.upper() + '_H'
+    yield r'#define ' + input.upper() + '_H'
+    yield r'#endif'
+
+def appendLine(file,content,addLine = False):
+    if addLine:
+        file.write(content + '\n')
+    else:
+        file.write(content)
+
+with open(inputfileName,mode='r',encoding='utf-8') as a_file:
+    content.extend(list(a_file))
+
+className = None
+
+for line in content:
+    match = re.search(classPattern,line)
+    if match:
+        className = match.group(1)
+        break;
+
+nsname = sys.argv[1] if len(sys.argv) > 1 else None
+needNamespace = True if nsname else False
+output(className,nsname,content,needNamespace)
+
+
+
+
+    
