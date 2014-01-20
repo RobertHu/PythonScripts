@@ -2,12 +2,14 @@
     "client":{
         "source": "D:\\Teams\\iExchangeCollection\\iExchange3 Team\\iExchange3\\FaxAndEmailManager\\bin\\Debug",
         "dest": "D:\\Work\\FaxEmail\\Publish",
-        "parts":[3] 
+        "parts":[3],
+        "filetype": ["*.dll","*.exe"]
     },
     "server": {
         "source": "D:\\Teams\\iExchangeCollection\\iExchange3 Team\\iExchange3\\FaxAndEmailService\\bin",
         "dest":"D:\\Work\\FaxEmail\\Publish",
-        "parts":[1,2] 
+        "parts":[2,1],
+        "filetype": ["*.dll","*.exe"]
     }
 }
 

@@ -29,10 +29,10 @@ def copyFileToSpeciftDest(files,host):
         dest_path = os.path.join(dest_dir,name)
         shutil.copyfile(file_path,dest_path)
 
-def copy(host,file_types):
+def copy(host):
     today = datetime.datetime.today()
     target = []
-    for file_type in file_types:
+    for file_type in host['filetype']:
         files=glob.glob(os.path.join(host['source'],file_type))
         for file in getAllFilesInSpecificDay(files,today):
             target.append(file)
@@ -44,10 +44,8 @@ if __name__ == '__main__':
     configs = None
     with open('config.json','r',encoding='utf-8') as f:
         configs = json.load(f)
-
-    filetypes = ['*.dll', '*.exe']
-    copy(configs['client'],filetypes)
-    copy(configs['server'],filetypes)
+    copy(configs['client'])
+    copy(configs['server'])
 
 
 

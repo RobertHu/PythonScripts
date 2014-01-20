@@ -30,6 +30,7 @@ def copyFileToSpeciftDest(files,host):
         shutil.copyfile(file_path,dest_path)
 
 def copy(host,file_types):
+    today = datetime.datetime.today()
     target = []
     for file_type in file_types:
         files=glob.glob(os.path.join(host['source'],file_type))
