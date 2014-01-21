@@ -1,9 +1,9 @@
-#ifndef _INITDATASERVICE_SERVICE_H
-#define _INITDATASERVICE_SERVICE_H
-namespace BusinessModel
+#ifndef _QUOTATIONBOXCOMMON_CONTROL_H
+#define _QUOTATIONBOXCOMMON_CONTROL_H
+namespace Controls
 {
 
-    class InitDataService_Service
+    class QuotationBoxCommon_Control
     {
     };
     

@@ -1,0 +1,51 @@
+import os,glob,re
+
+def replaceHeaderFileAndOverwrite(filePath,resList,template):
+    content=[]
+    with open(filePath,'r') as f:
+        content.extend(f)
+    for idx,line in enumerate(content):
+        for res in resList:
+            match = res.search(line)
+            if match:
+                print(match.group(1))
+                if match.group(1) == '#include':
+                    fileName = match.group(2)
+                    print(fileName)
+                    name, ext = os.path.splitext(fileName)
+                    include_template = name+'_Instrument' +ext 
+                    content[idx]=line.replace(match.group(2),include_template)
+                else:
+                    content[idx]=line.replace(match.group(2),template)
+
+    with open(filePath,'w') as f:
+        for line in content:
+            f.write(line)
+
+
+
+if __name__ == '__main__':
+    ifRe =re.compile('^\s*(#ifndef)\s+(.*)\s*$')
+    elseRe =re.compile('^\s*(#define)\s+(.*)\s*$')
+    includeRe = re.compile('^\s*(#include)\s+"([a-zA-Z]+\.h)"\s*$')
+    relist = [ifRe,elseRe,includeRe]
+    dirPath = r'D:\Work\experiment\Data'
+    filetypes = ['*.h', '*.cpp']
+    result = []
+    for file_type in filetypes:
+        result.extend(glob.glob(os.path.join(dirPath,file_type)))
+
+    for file in result:
+        dir, name = os.path.split(file)
+        filename, extension = os.path.splitext(name)
+        template_origin = filename + '_Instrument'
+        newName = template_origin + extension
+        if(extension == '.h'):
+            template = '_'+ template_origin.upper() + '_H'
+            replaceHeaderFileAndOverwrite(file,relist,template)
+        os.rename(file,os.path.join(dir,newName))
+
+    print('done')
+
+
+
